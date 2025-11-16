@@ -1,7 +1,7 @@
 package processor
 
 import (
-	"errors"
+	"strings"
 
 	"github.com/SSripilaipong/clipboard-helper/core"
 	"github.com/SSripilaipong/go-common/rslt"
@@ -17,5 +17,5 @@ func New() *Processor {
 
 // Process applies the given command to the provided input string.
 func (p *Processor) Process(command core.Command, input string) rslt.Of[string] {
-	return rslt.Error[string](errors.New("processor not implemented"))
+	return rslt.Value(strings.ToLower(input))
 }
