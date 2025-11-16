@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/SSripilaipong/go-common/rslt"
+	"github.com/atotto/clipboard"
 )
 
 // Writer pushes text back to the system clipboard.
@@ -20,7 +21,9 @@ func (w *Writer) WriteOutput(value rslt.Of[string]) {
 		w.WriteError(value.Error())
 		return
 	}
-	log.Printf("clipboard write placeholder: %s", value.Value())
+	if err := clipboard.WriteAll(value.Value()); err != nil {
+		w.WriteError(err)
+	}
 }
 
 // WriteError logs clipboard errors for now.

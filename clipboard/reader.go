@@ -1,9 +1,8 @@
 package clipboard
 
 import (
-	"errors"
-
 	"github.com/SSripilaipong/go-common/rslt"
+	"github.com/atotto/clipboard"
 )
 
 // Reader pulls text from the system clipboard.
@@ -16,5 +15,5 @@ func NewReader() *Reader {
 
 // ReadInput retrieves the clipboard text.
 func (r *Reader) ReadInput() rslt.Of[string] {
-	return rslt.Error[string](errors.New("clipboard reader not implemented"))
+	return rslt.New(clipboard.ReadAll())
 }
