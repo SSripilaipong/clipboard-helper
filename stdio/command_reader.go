@@ -3,6 +3,7 @@ package stdio
 import (
 	"errors"
 
+	"github.com/SSripilaipong/clipboard-helper/core"
 	"github.com/SSripilaipong/go-common/rslt"
 )
 
@@ -15,6 +16,6 @@ func NewCommandReader() *CommandReader {
 }
 
 // ReadCommand fetches the next command from the user.
-func (s *CommandReader) ReadCommand() rslt.Of[string] {
-	return rslt.Error[string](errors.New("stdin command reader not implemented"))
+func (s *CommandReader) ReadCommand() rslt.Of[core.Command] {
+	return rslt.Error[core.Command](errors.New("stdin command reader not implemented"))
 }

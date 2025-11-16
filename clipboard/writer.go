@@ -1,6 +1,10 @@
 package clipboard
 
-import "errors"
+import (
+	"log"
+
+	"github.com/SSripilaipong/go-common/rslt"
+)
 
 // Writer pushes text back to the system clipboard.
 type Writer struct{}
@@ -10,7 +14,18 @@ func NewWriter() *Writer {
 	return &Writer{}
 }
 
-// WriteOutput writes the provided text to the clipboard.
-func (w *Writer) WriteOutput(value string) error {
-	return errors.New("clipboard writer not implemented")
+// WriteOutput writes the provided result to the clipboard.
+func (w *Writer) WriteOutput(value rslt.Of[string]) {
+	if value.IsErr() {
+		w.WriteError(value.Error())
+		return
+	}
+	log.Printf("clipboard write placeholder: %s", value.Value())
+}
+
+// WriteError logs clipboard errors for now.
+func (w *Writer) WriteError(err error) {
+	if err != nil {
+		log.Printf("clipboard write error: %v", err)
+	}
 }
